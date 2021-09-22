@@ -1,0 +1,51 @@
+<%- include('header.ejs')  %> 
+
+
+    <div class="container text-center my-5">
+        <div class="user my-3">
+            <i class="far fa-edit user-icon"></i>
+            <h4 class="login">Register</h4>
+        </div>
+
+        <div class="card p-5 w-50 m-auto">
+            <form method="POST" action="/handleRegister">
+                <input value="<%= oldinput?oldinput.name:''%>" class="form-control" placeholder="Enter your Name" type="text" name="name">
+                <% if (validMass.find(e=>e.param=='name')) { %>
+                    <div class="alert alert-warning " role="alert">
+                        name not valid
+                    </div>
+                <% } %>
+                <input  value="<%= oldinput?oldinput.email:'' %>" class="form-control my-2 " placeholder="Enter your email" type="email" name="email">
+                <% if (validMass.find(e=>e.param=='email')) { %>
+                    <div class="alert alert-warning " role="alert">
+                        email not valid
+                    </div>
+                <% } %>
+                <input  value="<%= oldinput?oldinput.password:''%>" class="form-control  " placeholder="Enter your Password" type="password" name="password">
+                <% if (validMass.find(e=>e.param=='password')) { %>
+                    <div class="alert alert-warning " role="alert">
+                        <p>  password must be minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1</p>
+                    </div>
+                <% } %>
+                <input  class="form-control  my-2" placeholder="Password Confirmation" type="password" name="PasswordConfirmation">
+                <% if (validMass.find(e=>e.param=="PasswordConfirmation")) { %>
+                    <div class="alert alert-warning " role="alert">
+                        confirm Password not equel password
+                    </div>
+                <% } %>
+                <button class="btn btn-default-outline my-4 w-100 rounded">Register</button>
+                <a class="btn btn-default-outline" href="/login">Login</a>
+            </form>
+            
+    <% if (dbMass[0]) { %>
+        <div class="alert alert-warning my-4" role="alert">
+                <h4>Email is exist</h4>
+        </div>
+    <% } %>
+        </div>
+    </div>
+
+
+
+
+    <%- include('footer.ejs')  %> 
